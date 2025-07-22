@@ -26,6 +26,10 @@ impl Bank {
     }
 }
 
+fn print_account(account: Account) {
+    println!("Account ID: {}, Holder: {}, Balance: {}", account.id, account.holder, account.balance);
+}
+
 fn main() {
-    println!("Hello, world!");
+    // TODO: Implement functionality to add accounts and manage the bank
 }
