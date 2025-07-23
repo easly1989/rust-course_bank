@@ -14,21 +14,30 @@ impl Account {
         }
     }
 
-    fn deposit(&mut self, amount: i32) {
+    fn deposit(&mut self, amount: i32) -> i32 {
         if amount > 0 {
             self.balance += amount;
         } else {
             println!("Deposit amount must be positive.");
         }
+
+        self.balance
     }
 
-    fn withdraw(&mut self, amount: i32) {
+    fn withdraw(&mut self, amount: i32) -> i32 {
         if amount > 0 && amount <= self.balance {
             self.balance -= amount;
         } else {
             println!("Withdrawal amount must be positive and less than or equal to the balance.");
         }
+
+        self.balance
     }
+
+    fn summary(&self) -> String {
+        format!("Account ID: {}, Holder: {}, Balance: {}", self.id, self.holder, self.balance)
+    }
+    
 }
 
 #[derive(Debug)]
@@ -44,6 +53,14 @@ impl Bank {
     fn add_account(&mut self, account: Account) {
         self.accounts.push(account);
     }
+
+    fn total_balance(&self) -> i32 {
+        self.accounts.iter().map(|account| account.balance).sum()
+    }
+
+    fn summary(&self) -> Vec<String> {
+        self.accounts.iter().map(|account| account.summary()).collect()
+    }
 }
 
 fn main() {
@@ -54,5 +71,6 @@ fn main() {
     account.withdraw(50);
 
     bank.add_account(account);
-    println!("{:#?}", bank);
+    println!("{:#?}", bank.summary());
+    println!("{}", bank.total_balance());
 }
