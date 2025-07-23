@@ -30,6 +30,14 @@ fn print_account(account: Account) {
     println!("Account ID: {}, Holder: {}, Balance: {}", account.id, account.holder, account.balance);
 }
 
+fn change_account(account: &mut Account) {
+    account.balance += 10;
+}
+
 fn main() {
-    // TODO: Implement functionality to add accounts and manage the bank
+    let mut account = Account::new(1, "Alice".to_string());
+
+    change_account(&mut account);
+
+    print_account(account);
 }
